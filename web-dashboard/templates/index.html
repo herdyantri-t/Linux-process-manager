@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Linux Process Manager</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            Linux
+            <span>Process Manager</span>
+
+        </div>
+
+
+        <nav class="nav">
+
+
+            <div
+                class="nav-item active"
+                data-page="dashboard"
+            >
+                Dashboard
+            </div>
+
+
+            <div
+                class="nav-item"
+                data-page="processes"
+            >
+                Processes
+            </div>
+
+
+            <div
+                class="nav-item"
+                data-page="alerts"
+            >
+                Alerts
+            </div>
+
+
+            <div
+                class="nav-item"
+                data-page="activity"
+            >
+                Activity
+            </div>
+
+
+            <div
+                class="nav-item"
+                data-page="system"
+            >
+                System
+            </div>
+
+
+        </nav>
+
+
+        <div class="status">
+
+            ● Linux System
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div class="title">
+
+                <h1>
+                    Linux Process Manager
+                </h1>
+
+                <p>
+                    Debian Linux System Monitor
+                </p>
+
+            </div>
+
+
+            <div
+                class="online"
+                id="connection-status"
+            >
+
+                ● SYSTEM ONLINE
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =========================
+             CONTENT
+        ========================== -->
+
+        <section class="content">
+
+
+            <!-- =====================
+                 SYSTEM CARDS
+            ====================== -->
+
+            <div class="cards">
+
+
+                <!-- CPU -->
+
+                <div class="card">
+
+                    <div class="card-label">
+                        CPU Usage
+                    </div>
+
+                    <div
+                        class="card-value"
+                        id="cpu-value"
+                    >
+                        0%
+                    </div>
+
+                    <div
+                        class="card-sub"
+                        id="cpu-cores"
+                    >
+                        0 CPU cores
+                    </div>
+
+                </div>
+
+
+
+                <!-- MEMORY -->
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Memory
+                    </div>
+
+                    <div
+                        class="card-value"
+                        id="memory-value"
+                    >
+                        0%
+                    </div>
+
+                    <div
+                        class="card-sub"
+                        id="memory-detail"
+                    >
+                        0 MB / 0 MB
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROCESSES -->
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Processes
+                    </div>
+
+                    <div
+                        class="card-value"
+                        id="process-value"
+                    >
+                        0
+                    </div>
+
+                    <div class="card-sub">
+                        Running processes
+                    </div>
+
+                </div>
+
+
+
+                <!-- UPTIME -->
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Uptime
+                    </div>
+
+                    <div
+                        class="card-value"
+                        id="uptime-value"
+                    >
+                        0d 0h 0m
+                    </div>
+
+                    <div class="card-sub">
+                        System uptime
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =====================
+                 PERFORMANCE
+            ====================== -->
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+                    <div class="panel-title">
+
+                        System Performance
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-body">
+
+
+                    <div class="chart">
+
+                        <canvas
+                            id="performance-chart"
+                        ></canvas>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =====================
+                 PROCESS TABLE
+            ====================== -->
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+                    <div class="panel-title">
+
+                        Running Processes
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-body">
+
+
+                    <div class="controls">
+
+
+                        <input
+                            type="text"
+                            id="search"
+                            class="search"
+                            placeholder="Search process or PID..."
+                        >
+
+
+                        <button id="refresh">
+
+                            Refresh
+
+                        </button>
+
+
+                    </div>
+
+
+
+                    <div class="table-container">
+
+
+                        <table>
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        PID
+                                    </th>
+
+                                    <th>
+                                        PROCESS
+                                    </th>
+
+                                    <th>
+                                        STATE
+                                    </th>
+
+                                    <th>
+                                        CPU
+                                    </th>
+
+                                    <th>
+                                        RAM
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody
+                                id="process-table"
+                            >
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =====================
+                 FOOTER
+            ====================== -->
+
+            <div class="footer">
+
+                Linux Process Manager
+                •
+                Sistem Operasi Project
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script
+    src="{{ url_for('static', filename='app.js') }}"
+></script>
+
+
+</body>
+
+</html>

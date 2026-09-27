@@ -1,0 +1,311 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0f1117;
+    color: #e5e7eb;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 230px;
+    background: #151922;
+    border-right: 1px solid #252b38;
+    padding: 24px 16px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.logo span {
+    color: #4ade80;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #202633;
+    color: white;
+}
+
+.status {
+    position: absolute;
+    bottom: 25px;
+    left: 16px;
+    right: 16px;
+    padding: 12px;
+    background: #1b211e;
+    border-radius: 8px;
+    color: #4ade80;
+    font-size: 13px;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 230px;
+    width: calc(100% - 230px);
+    min-height: 100vh;
+}
+
+/* TOPBAR */
+
+.topbar {
+    height: 70px;
+    border-bottom: 1px solid #252b38;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    background: #11141b;
+}
+
+.title h1 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.title p {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.online {
+    color: #4ade80;
+    font-size: 13px;
+}
+
+/* CONTENT */
+
+.content {
+    padding: 30px;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #171b24;
+    border: 1px solid #252b38;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.card-label {
+    color: #8b93a1;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.card-value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.card-sub {
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* PANEL */
+
+.panel {
+    background: #171b24;
+    border: 1px solid #252b38;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.panel-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #252b38;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.panel-body {
+    padding: 20px;
+}
+
+/* CHART */
+
+.chart {
+    width: 100%;
+    height: 220px;
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* CONTROLS */
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search {
+    flex: 1;
+    background: #10131a;
+    border: 1px solid #303746;
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: white;
+    outline: none;
+}
+
+.search:focus {
+    border-color: #4ade80;
+}
+
+button {
+    background: #202633;
+    color: white;
+    border: 1px solid #303746;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #293140;
+}
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #131720;
+}
+
+th {
+    color: #8b93a1;
+    font-size: 12px;
+    text-align: left;
+    padding: 13px 15px;
+}
+
+td {
+    padding: 13px 15px;
+    border-top: 1px solid #252b38;
+    font-size: 13px;
+}
+
+tbody tr:hover {
+    background: #1d222d;
+}
+
+.cpu-high {
+    color: #f87171;
+    font-weight: bold;
+}
+
+.cpu-normal {
+    color: #4ade80;
+}
+
+.state {
+    color: #9ca3af;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    color: #555d6d;
+    font-size: 12px;
+    padding: 20px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .main {
+        margin-left: 190px;
+        width: calc(100% - 190px);
+    }
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
